@@ -1,0 +1,45 @@
+const fs = require("fs");
+const postalCodes = require("./postal_codes.json");
+
+const outputFileDirectory = "./fsa";
+const pcdByFsa = {};
+
+postalCodes.map((pcd) => {
+  const fsa = pcd.postcode.slice(0, 3).toUpperCase();
+
+  if (!pcdByFsa[fsa]) {
+    pcdByFsa[fsa] = {};
+  }
+
+  pcdByFsa[fsa][pcd.postcode.slice(3).toUpperCase()] = { lat: pcd.latitude, lng: pcd.longitude };
+});
+
+createNewOutputFolder(outputFileDirectory);
+
+for (const fsa in pcdByFsa) {
+  fs.writeFileSync(`fsa/${fsa}.json`, JSON.stringify(pcdByFsa[fsa]));
+}
+
+function createNewOutputFolder(folderName) {
+  if (fs.existsSync(outputFileDirectory)) {
+    renameExistingOutputFolder(outputFileDirectory);
+  } else {
+    try {
+      fs.mkdirSync(folderName);
+      console.log(`Successfully created output directory "${folderName}".`);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+}
+
+function renameExistingOutputFolder(folderName) {
+  const newFolderName = `${folderName}_${Date.now()}`;
+  fs.rename(folderName, newFolderName, function (err) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(`Successfully renamed existing output directory "${folderName}" to "${newFolderName}".`);
+    }
+  });
+}

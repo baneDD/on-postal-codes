@@ -1,0 +1,15 @@
+{
+  "name": "postal_codes",
+  "version": "1.0.0",
+  "description": "Tool to transform postal codes into something we can use",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "Bane Debeljevic",
+    "email": "bane.dd@gmail.com",
+    "url": "http://cleancode.ca"
+  },
+  "license": "MIT"
+}
