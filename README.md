@@ -1,3 +1,3 @@
-# on-postal-codes
+# Ontario Postal Codes
 
 A small node script to parse and modify the listing of all Ontario postal codes along with their coordinates
