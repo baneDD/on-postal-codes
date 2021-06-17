@@ -37,11 +37,10 @@ function createNewOutputFolder(folderName) {
 function renameExistingOutputFolder(folderName) {
   const newFolderName = `${folderName}_${Date.now()}`;
 
-  fs.rename(folderName, newFolderName, function (err) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log(`Successfully renamed existing output directory "${folderName}" to "${newFolderName}".`);
-    }
-  });
+  try {
+    fs.renameSync(folderName, newFolderName);
+    console.log(`Successfully renamed existing output directory "${folderName}" to "${newFolderName}".`);
+  } catch (err) {
+    console.error(err);
+  }
 }
