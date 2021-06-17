@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Output folder - this will need to be adjusted if output folder name changes
+/fsa*

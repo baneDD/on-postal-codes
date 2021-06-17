@@ -21,20 +21,22 @@ for (const fsa in pcdByFsa) {
 }
 
 function createNewOutputFolder(folderName) {
+  // If there is an output folder under the same name, we rename it
   if (fs.existsSync(outputFileDirectory)) {
     renameExistingOutputFolder(outputFileDirectory);
-  } else {
-    try {
-      fs.mkdirSync(folderName);
-      console.log(`Successfully created output directory "${folderName}".`);
-    } catch (err) {
-      console.error(err);
-    }
+  }
+
+  try {
+    fs.mkdirSync(folderName);
+    console.log(`Successfully created output directory "${folderName}".`);
+  } catch (err) {
+    console.error(err);
   }
 }
 
 function renameExistingOutputFolder(folderName) {
   const newFolderName = `${folderName}_${Date.now()}`;
+
   fs.rename(folderName, newFolderName, function (err) {
     if (err) {
       console.error(err);
